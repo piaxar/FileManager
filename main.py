@@ -93,7 +93,11 @@ def cat(curr_dir, file_name):
         err_msg('{} is not a file'.format(str(new_file)))
     else:
         with new_file.open() as f:
-            print(f.readline(), end='')
+            try:
+                print(f.readline(), end='')
+            except UnicodeError as e:
+                print(e)
+                err_msg("Error during reading")
 
 def main():
     curr_dir = Path.home().resolve()
